@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ChapterRepository::class)
  */
-class Chapter extends Favorite
+class Chapter
 {
     /**
      * @ORM\Id
@@ -31,7 +31,7 @@ class Chapter extends Favorite
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="book")
+     * @ORM\OneToMany(targetEntity=Resource::class, mappedBy="chapter")
      */
     private $resources;
 

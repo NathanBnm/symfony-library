@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=BookRepository::class)
  * @Vich\Uploadable
  */
-class Book extends Favorite
+class Book
 {
     /**
      * @ORM\Id
@@ -207,23 +207,6 @@ class Book extends Favorite
         return $this;
     }
 
-    public function __toString(): ?string
-    {
-        return $this->getTitle();
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -254,5 +237,30 @@ class Book extends Favorite
     public function getCoverName(): ?string
     {
         return $this->coverName;
+    }
+
+    /**
+     * @param string|null $coverName
+     */
+    public function setCoverName(?string $coverName): void
+    {
+        $this->coverName = $coverName;
+    }
+
+    public function __toString(): ?string
+    {
+        return $this->getTitle();
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 }

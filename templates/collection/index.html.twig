@@ -1,20 +1,20 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Books{% endblock %}
+{% block title %}Collection {{ collection.title }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <div class="row mt-5">
             <div class="col">
-                <h1>Books</h1>
+                <h1>Collection {{ collection.title }}</h1>
                 <p>
-                    {{ books|length }} results
+                    {{ collection.books|length }} books in this collection
                 </p>
             </div>
         </div>
-        {% if books|length > 0 %}
+        {% if collection.books|length > 0 %}
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5 books">
-                {% for book in books %}
+                {% for book in collection.books %}
                     <div class="col">
                         <div class="card">
                             <div class="row g-0">
@@ -26,7 +26,8 @@
                                 <div class="col-8 ps-2">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <a href="{{ path('app_book_show', {'id': book.id}) }}" class="text-dark text-decoration-none">
+                                            <a href="{{ path('app_book_show', {'id': book.id}) }}"
+                                               class="text-dark text-decoration-none">
                                                 {{ book.title }}
                                             </a>
                                         </h5>
@@ -36,7 +37,8 @@
                                         {% if book.collection %}
                                             <p class="card-text my-1">
                                                 <small>
-                                                    <a href="{{ path('app_collection_show', {'id': book.collection.id}) }}" class="text-muted text-decoration-none">
+                                                    <a href="{{ path('app_collection_show', {'id': book.collection.id}) }}"
+                                                       class="text-muted text-decoration-none">
                                                         Collection {{ book.collection.title }}
                                                     </a>
                                                 </small>
@@ -54,7 +56,7 @@
             </div>
         {% else %}
             <div class="alert alert-light px-0" role="alert">
-                Sorry, no books yet!
+                Sorry, this collection does not have any books!
             </div>
         {% endif %}
     </div>

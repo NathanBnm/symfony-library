@@ -1,12 +1,16 @@
 vich_uploader:
-    db_driver: orm
+  db_driver: orm
 
-    mappings:
-        coverFile:
-            uri_prefix: /medias/images/books/covers
-            upload_destination: '%kernel.project_dir%/public/medias/images/books/covers'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-        file:
-            uri_prefix: /medias/images/resources
-            upload_destination: '%kernel.project_dir%/public/medias/images/resources'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+  mappings:
+    coverFile:
+      uri_prefix: /medias/images/books/covers
+      upload_destination: '%kernel.project_dir%/public/medias/images/books/covers'
+      namer: Vich\UploaderBundle\Naming\UniqidNamer
+      delete_on_update: true
+      delete_on_remove: true
+    file:
+      uri_prefix: /medias/images/resources
+      upload_destination: '%kernel.project_dir%/public/medias/images/resources'
+      namer: Vich\UploaderBundle\Naming\UniqidNamer
+      delete_on_update: true
+      delete_on_remove: true

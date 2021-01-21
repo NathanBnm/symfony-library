@@ -20,4 +20,17 @@ class CollectionsController extends AbstractController
 
         return $this->render('collections/index.html.twig', compact('collections'));
     }
+
+    /**
+     * @Route("/collections/{id<[0-9]+>}", name="app_collection_show")
+     * @param BookCollectionRepository $collectionRepository
+     * @param int $id
+     * @return Response
+     */
+    public function show(BookCollectionRepository $collectionRepository, int $id): Response
+    {
+        $collection = $collectionRepository->find($id);
+
+        return $this->render("collection/index.html.twig", compact('collection'));
+    }
 }

@@ -1,0 +1,29 @@
+// Books
+
+.books .card,
+.books .card .row,
+.books .card .col,
+.books .card img {
+    height: 175px;
+}
+
+.books .card {
+    position: relative;
+}
+
+.books .card .favorite {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+// Collections
+.collections .card {
+    position: relative;
+}
+
+.collections .card .favorite {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}

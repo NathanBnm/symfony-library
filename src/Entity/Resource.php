@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=ResourceRepository::class)
  * @Vich\Uploadable
  */
-class Resource extends Favorite
+class Resource
 {
     /**
      * @ORM\Id

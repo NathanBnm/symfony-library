@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=BookCollectionRepository::class)
  */
-class BookCollection extends Favorite
+class BookCollection
 {
     /**
      * @ORM\Id

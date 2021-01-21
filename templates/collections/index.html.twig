@@ -1,33 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'layouts/base.html.twig' %}
 
 {% block title %}Collections{% endblock %}
 
 {% block body %}
     <div class="container">
-        <div class="row my-5">
+        <div class="row mt-5">
             <div class="col">
                 <h1>Collections</h1>
                 <p>
-                    Total : {{ collections|length }}
+                    {{ collections|length }} results
                 </p>
             </div>
         </div>
-        <div class="row my-2">
-            <div class="col">
-                {% if collections %}
-                    <div class="list-group">
-                        {% for collection in collections %}
-                            <a href="#"
-                               class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                {{ collection.title }}
-                                <span class="badge bg-primary rounded-pill">Number of books</span>
-                            </a>
-                        {% endfor %}
+        {% if collections|length > 0 %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5 collections">
+                {% for collection in collections %}
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ collection.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ collection.books|length }} books</h6>
+                                <a href="#" class="btn favorite" title="Favorite">
+                                    <i class="bi bi-heart"></i>
+                                </a>
+                            </div>
+                            <div class="card-footer text-end">
+                                <a href="{{ path('app_collection_show',  {'id': collection.id}) }}"
+                                   class="btn btn-sm stretched-link">
+                                    View collection<i class="bi bi-arrow-right ms-2"></i>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                {% else %}
-                    <p>Sorry, no collections yet!</p>
-                {% endif %}
+                {% endfor %}
             </div>
-        </div>
+        {% else %}
+            <div class="alert alert-light px-0" role="alert">
+                Sorry, no collections yet!
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
