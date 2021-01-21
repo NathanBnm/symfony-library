@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My favorites{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row my-5">
+            <div class="col">
+                <h1>My favorites</h1>
+            </div>
+        </div>
+        <div class="row my-2">
+            <div class="col">
+                <ul class="nav nav-tabs" id="favorites" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="books-tab" data-bs-toggle="tab" href="#books" role="tab"
+                           aria-controls="books" aria-selected="true">Books (count)</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="collections-tab" data-bs-toggle="tab" href="#collections"
+                           role="tab" aria-controls="collections">Collections (count)</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="chapters-tab" data-bs-toggle="tab" href="#chapters" role="tab"
+                           aria-controls="chapters">Chapters (count)</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="sections-tab" data-bs-toggle="tab" href="#sections" role="tab"
+                           aria-controls="sections">Sections (count)</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="resources-tab" data-bs-toggle="tab" href="#resources" role="tab"
+                           aria-controls="resources">Resources (count)</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="favoritesContent">
+                    <div class="tab-pane fade show active" id="books" role="tabpanel" aria-labelledby="books-tab">
+                        Favorite books here
+                    </div>
+                    <div class="tab-pane fade" id="collections" role="tabpanel"
+                         aria-labelledby="collections-tab">
+                        Favorite collections here
+                    </div>
+                    <div class="tab-pane fade" id="chapters" role="tabpanel" aria-labelledby="chapters-tab">
+                        Favorite chapters here
+                    </div>
+                    <div class="tab-pane fade" id="sections" role="tabpanel" aria-labelledby="sections-tab">
+                        Favorite sections here
+                    </div>
+                    <div class="tab-pane fade" id="resources" role="tabpanel"
+                         aria-labelledby="resources-tab">
+                        Favorite resources here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
