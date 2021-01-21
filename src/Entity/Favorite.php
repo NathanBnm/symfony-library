@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=FavoriteRepository::class)
+ * @ORM\InheritanceType("JOINED")
  */
 class Favorite
 {
@@ -16,9 +17,4 @@ class Favorite
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 }
