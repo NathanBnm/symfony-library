@@ -16,7 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\Entity(repositoryClass=BookRepository::class)
  * @Vich\Uploadable
  */
-class Book
+class Book extends Favorite
 {
     /**
      * @ORM\Id
@@ -79,10 +79,20 @@ class Book
      */
     private $resources;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="book")
+     */
+    private $subscriptions;
+
+    /**
+     * Book constructor.
+     */
     public function __construct()
     {
+        parent::__construct();
         $this->chapters = new ArrayCollection();
         $this->resources = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     /**
@@ -123,11 +133,18 @@ class Book
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAuthor(): ?string
     {
         return $this->author;
     }
 
+    /**
+     * @param string $author
+     * @return $this
+     */
     public function setAuthor(string $author): self
     {
         $this->author = $author;
@@ -135,11 +152,18 @@ class Book
         return $this;
     }
 
+    /**
+     * @return BookCollection|null
+     */
     public function getCollection(): ?BookCollection
     {
         return $this->collection;
     }
 
+    /**
+     * @param BookCollection|null $collection
+     * @return $this
+     */
     public function setCollection(?BookCollection $collection): self
     {
         $this->collection = $collection;
@@ -155,6 +179,10 @@ class Book
         return $this->chapters;
     }
 
+    /**
+     * @param Chapter $chapter
+     * @return $this
+     */
     public function addChapter(Chapter $chapter): self
     {
         if (!$this->chapters->contains($chapter)) {
@@ -165,6 +193,10 @@ class Book
         return $this;
     }
 
+    /**
+     * @param Chapter $chapter
+     * @return $this
+     */
     public function removeChapter(Chapter $chapter): self
     {
         if ($this->chapters->removeElement($chapter)) {
@@ -185,6 +217,10 @@ class Book
         return $this->resources;
     }
 
+    /**
+     * @param Resource $resource
+     * @return $this
+     */
     public function addResource(Resource $resource): self
     {
         if (!$this->resources->contains($resource)) {
@@ -195,6 +231,10 @@ class Book
         return $this;
     }
 
+    /**
+     * @param Resource $resource
+     * @return $this
+     */
     public function removeResource(Resource $resource): self
     {
         if ($this->resources->removeElement($resource)) {
@@ -207,16 +247,25 @@ class Book
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return File|null
+     */
     public function getCoverFile(): ?File
     {
         return $this->coverFile;
     }
 
+    /**
+     * @param File|null $coverFile
+     */
     public function setCoverFile(?File $coverFile = null): void
     {
         $this->coverFile = $coverFile;
@@ -247,19 +296,67 @@ class Book
         $this->coverName = $coverName;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString(): ?string
     {
         return $this->getTitle();
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    /**
+     * @param Subscription $subscription
+     * @return $this
+     */
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
+            $subscription->setBook($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Subscription $subscription
+     * @return $this
+     */
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscriptions->removeElement($subscription)) {
+            // set the owning side to null (unless already changed)
+            if ($subscription->getBook() === $this) {
+                $subscription->setBook(null);
+            }
+        }
 
         return $this;
     }

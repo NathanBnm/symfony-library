@@ -4,36 +4,68 @@
 
 {% block body %}
     <div class="container">
-        <div class="row my-5">
+        <div class="row mt-5">
             <div class="col">
                 <h1>My books</h1>
                 <p>
-                    Total : {{ subscriptions|length }}
+                    {{ subscriptions|length }} results
                 </p>
             </div>
         </div>
-        <div class="row my-2">
-            <div class="col">
+        {% if subscriptions|length > 0 %}
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-2 mb-5 books">
                 {% for subscription in subscriptions %}
-                    <div class="card mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="{{  vich_uploader_asset(subscription.book, 'coverFile') }}" alt="{{ subscription.book.title }}">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ subscription.book.title }}</h5>
-                                    <p class="card-text">{{ subscription.book.author }}</p>
-                                    <p class="card-text"><small class="text-muted"></small>
-                                    </p>
+                    <div class="col">
+                        <div class="card">
+                            <div class="row g-0">
+                                <div class="col-4">
+                                    <a href="{{ path('app_book_show', {'id': subscription.book.id}) }}">
+                                        <img src="{{ vich_uploader_asset(subscription.book, 'coverFile') }}" alt="{{ subscription.book.title }}">
+                                    </a>
+                                </div>
+                                <div class="col-8 ps-2">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{ path('app_book_show', {'id': subscription.book.id}) }}"
+                                               class="text-dark text-decoration-none">
+                                                {{ subscription.book.title }}
+                                            </a>
+                                        </h5>
+                                        <p class="card-text my-0">
+                                            {{ subscription.book.author }}
+                                        </p>
+                                        {% if subscription.book.collection %}
+                                            <p class="card-text my-1">
+                                                <small>
+                                                    <a href="{{ path('app_collection_show', {'id': subscription.book.collection.id}) }}"
+                                                       class="text-muted text-decoration-none">
+                                                        Collection {{ subscription.book.collection.title }}
+                                                    </a>
+                                                </small>
+                                            </p>
+                                        {% endif %}
+                                        {% if app.user %}
+                                            <div class="actions">
+                                                <a href="{{ path('app_subscription_remove', {'bookId': subscription.book.id}) }}"
+                                                   class="btn subscribe" title="Unsubscribe">
+                                                    <i class="bi bi-bookmark-dash"></i>
+                                                </a>
+                                                <a href="#" class="btn favorite" title="Favorite">
+                                                    <i class="bi bi-heart"></i>
+                                                </a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <p>You didn't subscribed to any book yet!</p>
                 {% endfor %}
             </div>
-        </div>
+        {% else %}
+            <div class="alert alert-light px-0" role="alert">
+                Sorry, you didn't subscribe to any books yet!
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

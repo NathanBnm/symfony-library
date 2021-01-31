@@ -12,13 +12,24 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+/**
+ * Class BookCrudController
+ * @package App\Controller\Admin
+ */
 class BookCrudController extends AbstractCrudController
 {
+    /**
+     * @return string
+     */
     public static function getEntityFqcn(): string
     {
         return Book::class;
     }
 
+    /**
+     * @param Crud $crud
+     * @return Crud
+     */
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -26,6 +37,10 @@ class BookCrudController extends AbstractCrudController
             ->setEntityLabelInPlural('Books');
     }
 
+    /**
+     * @param string $pageName
+     * @return iterable
+     */
     public function configureFields(string $pageName): iterable
     {
         switch ($pageName) {

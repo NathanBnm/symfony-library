@@ -26,7 +26,8 @@
                                 <div class="col-8 ps-2">
                                     <div class="card-body">
                                         <h5 class="card-title">
-                                            <a href="{{ path('app_book_show', {'id': book.id}) }}" class="text-dark text-decoration-none">
+                                            <a href="{{ path('app_book_show', {'id': book.id}) }}"
+                                               class="text-dark text-decoration-none">
                                                 {{ book.title }}
                                             </a>
                                         </h5>
@@ -36,15 +37,24 @@
                                         {% if book.collection %}
                                             <p class="card-text my-1">
                                                 <small>
-                                                    <a href="{{ path('app_collection_show', {'id': book.collection.id}) }}" class="text-muted text-decoration-none">
+                                                    <a href="{{ path('app_collection_show', {'id': book.collection.id}) }}"
+                                                       class="text-muted text-decoration-none">
                                                         Collection {{ book.collection.title }}
                                                     </a>
                                                 </small>
                                             </p>
                                         {% endif %}
-                                        <a href="#" class="btn favorite" title="Favorite">
-                                            <i class="bi bi-heart"></i>
-                                        </a>
+                                        {% if app.user %}
+                                        <div class="actions">
+                                            <a href="{{ path('app_subscription_add', {'bookId': book.id}) }}"
+                                               class="btn subscribe" title="Subscribe">
+                                                <i class="bi bi-bookmark-plus"></i>
+                                            </a>
+                                            <a href="#" class="btn favorite" title="Favorite">
+                                                <i class="bi bi-heart"></i>
+                                            </a>
+                                        </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>

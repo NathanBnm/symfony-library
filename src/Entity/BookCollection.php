@@ -29,11 +29,17 @@ class BookCollection
      */
     private $books;
 
+    /**
+     * BookCollection constructor.
+     */
     public function __construct()
     {
         $this->books = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -47,6 +53,10 @@ class BookCollection
         return $this->books;
     }
 
+    /**
+     * @param Book $book
+     * @return $this
+     */
     public function addBook(Book $book): self
     {
         if (!$this->books->contains($book)) {
@@ -57,6 +67,10 @@ class BookCollection
         return $this;
     }
 
+    /**
+     * @param Book $book
+     * @return $this
+     */
     public function removeBook(Book $book): self
     {
         if ($this->books->removeElement($book)) {
@@ -69,16 +83,26 @@ class BookCollection
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString(): ?string
     {
         return $this->getTitle();
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;

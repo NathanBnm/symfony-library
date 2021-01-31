@@ -70,16 +70,26 @@ class Resource
      */
     private $fileName;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return Book|null
+     */
     public function getBook(): ?Book
     {
         return $this->book;
     }
 
+    /**
+     * @param Book|null $book
+     * @return $this
+     */
     public function setBook(?Book $book): self
     {
         $this->book = $book;
@@ -87,11 +97,18 @@ class Resource
         return $this;
     }
 
+    /**
+     * @return Chapter|null
+     */
     public function getChapter(): ?Chapter
     {
         return $this->chapter;
     }
 
+    /**
+     * @param Chapter|null $chapter
+     * @return $this
+     */
     public function setChapter(?Chapter $chapter): self
     {
         $this->chapter = $chapter;
@@ -99,11 +116,18 @@ class Resource
         return $this;
     }
 
+    /**
+     * @return Section|null
+     */
     public function getSection(): ?Section
     {
         return $this->section;
     }
 
+    /**
+     * @param Section|null $section
+     * @return $this
+     */
     public function setSection(?Section $section): self
     {
         $this->section = $section;
@@ -111,11 +135,18 @@ class Resource
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -123,11 +154,17 @@ class Resource
         return $this;
     }
 
+    /**
+     * @return File|null
+     */
     public function getFile(): ?File
     {
         return $this->file;
     }
 
+    /**
+     * @param File|null $file
+     */
     public function setFile(?File $file = null): void
     {
         $this->file = $file;
@@ -158,6 +195,9 @@ class Resource
         $this->fileName = $fileName;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString(): ?string
     {
         return $this->getTitle();

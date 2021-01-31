@@ -14,6 +14,10 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class FavoriteRepository extends ServiceEntityRepository
 {
+    /**
+     * FavoriteRepository constructor.
+     * @param ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Favorite::class);

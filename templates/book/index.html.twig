@@ -4,11 +4,76 @@
 
 {% block body %}
     <div class="container">
-        <div class="row mt-5">
+        <div class="row mt-5 books">
             <div class="col">
-                <img src="{{ vich_uploader_asset(book, 'coverFile') }}" alt="{{ book.title }}">
-                <h1>{{ book.title }}</h1>
-                <p class="card-text">{{ book.author }}</p>
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-4 col-md-2">
+                            <img src="{{ vich_uploader_asset(book, 'coverFile') }}" alt="{{ book.title }}">
+                        </div>
+                        <div class="col-8 col-md-10 ps-2">
+                            <div class="card-body">
+                                <h1 class="card-title h5">
+                                    {{ book.title }}
+                                </h1>
+                                <p class="card-text my-0">
+                                    {{ book.author }}
+                                </p>
+                                {% if book.collection %}
+                                    <p class="card-text my-1">
+                                        <small>
+                                            <a href="{{ path('app_collection_show', {'id': book.collection.id}) }}"
+                                               class="text-muted text-decoration-none">
+                                                Collection {{ book.collection.title }}
+                                            </a> </small>
+                                    </p>
+                                {% endif %}
+                                <div class="actions">
+                                    <a href="{{ path('app_subscription_add', {'bookId': book.id}) }}"
+                                       class="btn subscribe" title="Subscribe">
+                                        <i class="bi bi-bookmark-plus"></i>
+                                    </a>
+                                    <a href="#" class="btn favorite" title="Favorite">
+                                        <i class="bi bi-heart"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row chapters">
+            <div class="col">
+                <h2 class="h5 my-3">{{ book.chapters|length }} chapters</h2>
+                {% if book.chapters|length > 0 %}
+                    <div class="list-group list-group-root">
+                        {% for chapter in book.chapters %}
+                            <a href="#chapter-{{ chapter.id }}"
+                               class="list-group-item list-group-item-action d-flex justify-content-between"
+                               data-bs-toggle="collapse">
+                                {{ chapter.title }}
+                                {% if chapter.sections|length > 0 %}
+                                    <i class="bi bi-chevron-right"></i>
+                                {% endif %}
+                            </a>
+                            {% if chapter.sections|length > 0 %}
+                                <div class="list-group collapse" id="chapter-{{ chapter.id }}">
+                                    {% for section in chapter.sections %}
+                                        <a href="#section-{{ section.id }}"
+                                           class="list-group-item list-group-item-action d-flex justify-content-between"
+                                           data-bs-toggle="collapse">
+                                            {{ section.title }}
+                                            {% if section.sections|length > 0 %}
+                                                <i class="bi bi-chevron-right"></i>
+                                            {% endif %}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

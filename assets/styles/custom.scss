@@ -4,26 +4,56 @@
 .books .card .row,
 .books .card .col,
 .books .card img {
-    height: 175px;
+  height: 175px;
 }
 
 .books .card {
-    position: relative;
+  position: relative;
 }
 
-.books .card .favorite {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
+.books .card .actions {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 // Collections
+
 .collections .card {
-    position: relative;
+  position: relative;
 }
 
 .collections .card .favorite {
-    position: absolute;
-    right: 10px;
-    top: 10px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+// Chapters
+
+.chapters .list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.chapters .list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.chapters .list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border-width: 1px 0 0 0;
+  padding-left: 5px;
+}
+
+.chapters .list-group.list-group-root > .list-group-item:first-child {
+  border-top: none;
+}
+
+.chapters .list-group.list-group-root > .list-group > .list-group-item {
+  padding-left: 15px;
+}
+
+.chapters .list-group.list-group-root > .list-group > .list-group > .list-group-item {
+  padding-left: 30px;
 }

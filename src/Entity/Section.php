@@ -21,12 +21,13 @@ class Section
 
     /**
      * @ORM\ManyToOne(targetEntity=Chapter::class, inversedBy="sections")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $chapter;
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sections")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $section;
 
@@ -45,22 +46,35 @@ class Section
      */
     private $title;
 
+    /**
+     * Section constructor.
+     */
     public function __construct()
     {
         $this->sections = new ArrayCollection();
         $this->resources = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return Chapter|null
+     */
     public function getChapter(): ?Chapter
     {
         return $this->chapter;
     }
 
+    /**
+     * @param Chapter|null $chapter
+     * @return $this
+     */
     public function setChapter(?Chapter $chapter): self
     {
         $this->chapter = $chapter;
@@ -76,6 +90,10 @@ class Section
         return $this->sections;
     }
 
+    /**
+     * @param Section $section
+     * @return $this
+     */
     public function addSection(self $section): self
     {
         if (!$this->sections->contains($section)) {
@@ -86,6 +104,10 @@ class Section
         return $this;
     }
 
+    /**
+     * @param Section $section
+     * @return $this
+     */
     public function removeSection(self $section): self
     {
         if ($this->sections->removeElement($section)) {
@@ -98,11 +120,18 @@ class Section
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getSection(): ?self
     {
         return $this->section;
     }
 
+    /**
+     * @param Section|null $section
+     * @return $this
+     */
     public function setSection(?self $section): self
     {
         $this->section = $section;
@@ -118,6 +147,10 @@ class Section
         return $this->resources;
     }
 
+    /**
+     * @param Resource $resource
+     * @return $this
+     */
     public function addResource(Resource $resource): self
     {
         if (!$this->resources->contains($resource)) {
@@ -128,6 +161,10 @@ class Section
         return $this;
     }
 
+    /**
+     * @param Resource $resource
+     * @return $this
+     */
     public function removeResource(Resource $resource): self
     {
         if ($this->resources->removeElement($resource)) {
@@ -140,20 +177,30 @@ class Section
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function __toString(): ?string
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
-    }
-
-    public function __toString(): ?string
-    {
-        return $this->getTitle();
     }
 }
